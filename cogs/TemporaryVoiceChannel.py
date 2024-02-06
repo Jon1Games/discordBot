@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+
 class TemporaryVoice(commands.Cog):
     temporary_channels = []
 
@@ -19,7 +20,6 @@ class TemporaryVoice(commands.Cog):
             if after.channel.name == "➕Kanal Erstellen➕":
                 temp_channel = await after.channel.clone(name=possible_channel_name)
                 await member.move_to(temp_channel)
-                temp_channel_id = temp_channel.id
                 self.temporary_channels.append(temp_channel.id)
 
         if before.channel:
