@@ -2,18 +2,20 @@ import yaml
 
 configInfo = {
         'WelcomeMessage': {
+            'Enabled': False,
             'ChannelID': None,
             'Title': "Welcome",
             'Description': "hello {user}",
             'Color': {
-                'Info': "This works with RGB colors (dont change this)",
+                'Info': "This works with RGB colors",
                 'Red': 0,
                 'Green': 255,
                 'Blue': 0
             }
         },
         'TemporaryVoice': {
-            'ChannelID' : None,
+            'Enabled': False,
+            'ChannelID': None,
             'CreateChannelName': "{user}´s Channel"
         }
     }

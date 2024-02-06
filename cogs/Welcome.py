@@ -16,16 +16,17 @@ class Welcome(commands.Cog):
         if not os.path.isfile("config/" + str(member.guild.id) + ".yml"):
             await createConfig.createConf(member.guild.id)
         config = yaml.safe_load(open("config/" + str(member.guild.id) + ".yml"))
-        channel = self.bot.get_channel(config['WelcomeMessage']['ChannelID'])
-        embed = discord.Embed(title=config['WelcomeMessage']['Title'],
-                              description=config['WelcomeMessage']['Description'].format(user=member.mention),
-                              color=discord.Color.from_rgb(config['WelcomeMessage']['Color']['Red'],
-                                                           config['WelcomeMessage']['Color']['Green'],
-                                                           config['WelcomeMessage']['Color']['Blue']))
+        if config["WelcomeMessage"]["Enabled"]:
+            channel = self.bot.get_channel(config['WelcomeMessage']['ChannelID'])
+            embed = discord.Embed(title=config['WelcomeMessage']['Title'],
+                                  description=config['WelcomeMessage']['Description'].format(user=member.mention),
+                                  color=discord.Color.from_rgb(config['WelcomeMessage']['Color']['Red'],
+                                                               config['WelcomeMessage']['Color']['Green'],
+                                                               config['WelcomeMessage']['Color']['Blue']))
 
-        embed.set_thumbnail(url=member.avatar)
+            embed.set_thumbnail(url=member.avatar)
 
-        await channel.send(embed=embed)
+            await channel.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_ready(self):

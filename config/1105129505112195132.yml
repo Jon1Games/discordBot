@@ -1,9 +1,11 @@
 WelcomeMessage:
+  Enabled: True
   ChannelID: 1140697774950731876
   Color: {Blue: 0, Green: 255, Info: This works with RGB colors (dont change this),
     Red: 0}
   Description: hello {user}
   Title: Welcome
 TemporaryVoice:
+  Enabled: True
   ChannelID: 1152589501781258361
   CreateChannelName: "{user}s Channel"
