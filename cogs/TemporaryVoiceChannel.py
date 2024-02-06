@@ -1,5 +1,8 @@
 import discord
+import yaml
 from discord.ext import commands
+import os
+import createConfig
 
 
 class TemporaryVoice(commands.Cog):
@@ -15,9 +18,12 @@ class TemporaryVoice(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState,
                                     after: discord.VoiceState):
-        possible_channel_name = f"{member.name}'s Channel"
+        if not os.path.isfile("config/" + str(member.guild.id) + ".yml"):
+            await createConfig.createConf(member.guild.id)
+        config = yaml.safe_load(open("config/" + str(member.guild.id) + ".yml"))
+        possible_channel_name = config["TemporaryVoice"]["CreateChannelName"].format(user=member.name)
         if after.channel:
-            if after.channel.name == "➕Kanal Erstellen➕":
+            if after.channel.id == config["TemporaryVoice"]["ChannelID"]:
                 temp_channel = await after.channel.clone(name=possible_channel_name)
                 await member.move_to(temp_channel)
                 self.temporary_channels.append(temp_channel.id)

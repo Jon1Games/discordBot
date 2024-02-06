@@ -1,1 +1,0 @@
-init = 'The Language for this bot is english'

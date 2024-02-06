@@ -1,5 +1,10 @@
+import os.path
+
 import discord
 from discord.ext import commands
+import yaml
+
+import createConfig
 
 
 class Welcome(commands.Cog):
@@ -8,14 +13,17 @@ class Welcome(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        channel = self.bot.get_channel(1140697774950731876)
+        if not os.path.isfile("config/" + str(member.guild.id) + ".yml"):
+            await createConfig.createConf(member.guild.id)
+        config = yaml.safe_load(open("config/" + str(member.guild.id) + ".yml"))
+        channel = self.bot.get_channel(config['WelcomeMessage']['ChannelID'])
+        embed = discord.Embed(title=config['WelcomeMessage']['Title'],
+                              description=config['WelcomeMessage']['Description'].format(user=member.mention),
+                              color=discord.Color.from_rgb(config['WelcomeMessage']['Color']['Red'],
+                                                           config['WelcomeMessage']['Color']['Green'],
+                                                           config['WelcomeMessage']['Color']['Blue']))
 
-        embed = discord.Embed(title='Willkommen auf dem Gaming Lounge Discord Server!',
-                              description=f'Willkommen {member.mention}, auf unserem Server! Wir hoffen du hast Spaß '
-                                          f'hier!\n\n',
-                              color=discord.Color.green())
-
-        embed.set_thumbnail(url=member.avatar_url)
+        embed.set_thumbnail(url=member.avatar)
 
         await channel.send(embed=embed)
 

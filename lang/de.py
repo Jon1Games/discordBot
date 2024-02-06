@@ -1,1 +1,0 @@
-init = 'Die Sprache des Bottes ist Deutsch'

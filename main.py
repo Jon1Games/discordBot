@@ -5,6 +5,8 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 
+import createConfig
+
 load_dotenv()
 
 intents = discord.Intents.default()
