@@ -1,0 +1,19 @@
+{
+  "name": "DiscordBot",
+  "version": "v1.0",
+  "description": "Simple Discord Bot",
+  "main": "main.py",
+  "scripts": {
+    "start": "main.py",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jon1Games",
+  "license": "MIT",
+  "dependencies": {
+    "python": "*",
+    "dotenv": "*",
+    "pyyaml": "*",
+    "discordpy-v4": "*"
+  }
+}

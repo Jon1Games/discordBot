@@ -5,8 +5,6 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 
-import createConfig
-
 load_dotenv()
 
 intents = discord.Intents.default()
@@ -14,7 +12,7 @@ intents.members = True
 intents.voice_states = True
 
 bot = commands.Bot(
-    command_prefix="!",
+    command_prefix=commands.when_mentioned_or(),
     intents=intents,
     activity=discord.Activity(type=discord.ActivityType.playing, name='mit dem code'),
     status=discord.Status.online,
@@ -26,12 +24,15 @@ bot = commands.Bot(
 async def load():
     await bot.load_extension("cogs.Welcome")
     await bot.load_extension("cogs.TemporaryVoiceChannel")
+    await bot.load_extension("cogs.JoinRole")
+    await bot.load_extension("cogs.AdminCommands")
 
 
 async def main():
-    print("Starting bot...")
+    print("Initialise bot...")
     print("Loading cogs...")
     await load()
+    print("Start bot...")
     await bot.start(os.getenv("TEST_BOT_TOKEN"))
 
 

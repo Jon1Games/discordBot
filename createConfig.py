@@ -17,6 +17,9 @@ configInfo = {
             'Enabled': False,
             'ChannelID': None,
             'CreateChannelName': "{user}´s Channel"
+        },
+        'AutoRole': {
+            'Enabled': False
         }
     }
 
@@ -25,4 +28,4 @@ async def createConf(guildID):
     file = open("config/" + str(guildID) + '.yml', 'a')
     file.close()
     with open("config/" + str(guildID) + ".yml", 'w') as yamlfile:
-        yaml.dump(configInfo, yamlfile, sort_keys=True, default_flow_style=None)
+        yaml.dump(configInfo, yamlfile, sort_keys=True)
