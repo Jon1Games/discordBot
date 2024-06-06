@@ -23,9 +23,6 @@ bot = commands.Bot(
 
 async def load():
     await bot.load_extension("cogs.Welcome")
-    await bot.load_extension("cogs.TemporaryVoiceChannel")
-    await bot.load_extension("cogs.JoinRole")
-    await bot.load_extension("cogs.AdminCommands")
 
 
 async def main():
